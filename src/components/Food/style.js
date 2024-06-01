@@ -32,7 +32,7 @@ export const ContainerCard = styled.div`
 
   > span {
     line-height: 100%;
-    color: ${({ theme }) => theme.colors.lightBlue};
+    color: ${({ theme }) => theme.COLORS.LIGHT_BLUE};
     margin-bottom: ${({ isAdmin }) => (isAdmin ? "4.6rem" : "0")};
   }
 

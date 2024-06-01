@@ -2,9 +2,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { ContainerMenu } from "./style";
 
-import { NavigationHeader } from '../../components/NavigationHeader';
+import { NavigationHeader } from '../NavigationHeader';
 import { SearchBar } from "../SearchBar";
 import { ButtonText } from "../ButtonText";
+import { useAuth } from '../../hooks/auth';
 
 export function Menu({ isAdmin, isMenuOpen, setIsMenuOpen, setSearch, isDisabled }) {
   const { signOut } = useAuth();

@@ -24,7 +24,7 @@ export const Logo = styled.div`
   align-items: center;
 
   > img {
-    height: 12.4rem;
+    width: 12.4rem;
   }
 
   @media (min-width: 1024px) {

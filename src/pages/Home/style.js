@@ -27,8 +27,14 @@ export const ContainerHome = styled.div`
         border-radius: 0.3rem;
         position: relative;
 
+        background: linear-gradient(
+          180deg,
+          ${({ theme }) => theme.COLORS.GRADIENT1} 0%,
+          ${({ theme }) => theme.COLORS.GRADIENT2} 100%
+        );
+
         .header-image {
-          width: 19.1rem;
+          width: 20rem;
           position: absolute;
           left: -3rem;
           bottom: 0;
@@ -39,6 +45,7 @@ export const ContainerHome = styled.div`
           position: absolute;
           top: 3.6rem;
           right: 2.1rem;
+          background: transparent;
           color: ${({ theme }) => theme.COLORS.GRAY_200};
 
           h1 {
@@ -77,6 +84,7 @@ export const ContainerHome = styled.div`
       > div {
         width: calc(100% - 24.6rem);
         margin: 17.2rem 12.3rem 4.8rem;
+        padding-top: 5rem;
 
         .custom-header {
           height: 26rem;
@@ -84,7 +92,7 @@ export const ContainerHome = styled.div`
           border-radius: 0.8rem;
 
           .header-image {
-            width: 65.6rem;
+            width: 70%;
             left: -7rem;
             bottom: -1.4rem;
           }

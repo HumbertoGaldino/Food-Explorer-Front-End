@@ -3,6 +3,7 @@ import { useState } from "react";
 import { LuPencil } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa";
 import { PiCaretRightBold } from "react-icons/pi";
+import { api } from '../../services/api';
 
 import { useMediaQuery } from "react-responsive";
 import theme from "../../styles/theme";
@@ -27,9 +28,9 @@ export function Food({ data, isAdmin, isFavorite, updateFavorite, handleDetails,
   const handleFavorite = async () => {
     try {
       if (isFavorite) {
-        updateFavorite(true, data.id);
+        toggleFavorite(true, data.id);
       } else {
-        updateFavorite(false, data.id);
+        toggleFavorite(false, data.id);
       }
     } catch (error) {
       console.log('Erro ao atualizar favoritos:', error);
@@ -67,7 +68,7 @@ export function Food({ data, isAdmin, isFavorite, updateFavorite, handleDetails,
       if (error.response) {
         alert(error.response.data.message);
       } else {
-        alert('Não foi possível o prato ao adicionar ao carrinho.');
+        alert('Não foi possível adicionar o prato ao carrinho.');
         console.log('Erro ao adicionar ao carrinho:', error);
       }
     } finally {
@@ -107,7 +108,7 @@ export function Food({ data, isAdmin, isFavorite, updateFavorite, handleDetails,
       {!isAdmin && 
         <OrderButton>
           <NumberPicker number={number} setNumber={setNumber} />
-          <Button title="incluir" onClick={handleInclude} loading={loading} />
+          <Button title="Incluir" onClick={handleInclude} loading={loading} />
         </OrderButton>
       }
     </ContainerCard>

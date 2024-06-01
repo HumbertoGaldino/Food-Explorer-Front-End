@@ -13,62 +13,23 @@ import { Footer } from '../../components/Footer';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-import bannerHomeMobile from "../../assets/banner-mobile.png";
-import bannerHomeDesktop from "../../assets/home-banner.png";
-
+import bannerHomeMobile from "../../assets/banner-home-mobile.png";
+import bannerHomeDesktop from "../../assets/banner-home-desktop.png";
 
 export function Home({ isAdmin, user_id }) {
-  const swiperElRef1 = useRef(null);
-  const swiperElRef2 = useRef(null);
-  const swiperElRef3 = useRef(null);
-
   const isDesktop = useMediaQuery({ minWidth: 1024 });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.5 // the value in percentage indicates at what visibility the callback should be called
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // If the element is visible, start the Swiper autoplay if the ref is not null
-          entry.target.swiper && entry.target.swiper.autoplay.start();
-        } else {
-          // If the element is not visible, stop the Swiper autoplay if the ref is not null
-          entry.target.swiper && entry.target.swiper.autoplay.stop();
-        }        
-      });
-    }, options);
-
-    // Observe the visibility changes of elements containing Swiper
-    observer.observe(swiperElRef1.current);
-    observer.observe(swiperElRef2.current);
-    observer.observe(swiperElRef3.current);
-
-    return () => {
-      observer.disconnect();
-    }
-  }, []);
+  const navigate = useNavigate();
 
   const [dishes, setDishes] = useState({ meals: [], desserts: [], beverages: [] });
   const [search, setSearch] = useState("");
-
-  const navigate = useNavigate();
-
-  function handleDetails(id) {
-    navigate(`/dish/${id}`);
-  }
-
+ 
   useEffect(() => {
     async function fetchDishes() {
       const response = await api.get(`/dishes?search=${search}`);
-      const meals = response.data.filter(dish => dish.category === "meal");
-      const desserts = response.data.filter(dish => dish.category === "dessert");
-      const beverages = response.data.filter(dish => dish.category === "beverage");
+      const meals = response.data.filter(dish => dish.category === "Refeição");
+      const desserts = response.data.filter(dish => dish.category === "Sobremesa");
+      const beverages = response.data.filter(dish => dish.category === "Bebidas");
 
       setDishes({ meals, desserts, beverages });
     }
@@ -82,9 +43,9 @@ export function Home({ isAdmin, user_id }) {
     const fetchFavorites = async () => {
       try {
         const response = await api.get("/favorites");
-        const favorites = response.data.map((favorite) => favorite.dish_id);
+        const favoritesMap = response.data.map((favorite) => favorite.dish_id);
 
-        setFavorites(favorites);
+        setFavorites(favoritesMap);
       } catch (error) {
         console.log("Erro ao buscar favoritos:", error);
       }
@@ -93,7 +54,7 @@ export function Home({ isAdmin, user_id }) {
     fetchFavorites();
   }, []);
 
-  const updateFavorite = async (isFavorite, dishId) => {
+  const toggleFavorite = async (isFavorite, dishId) => {
     try {
       if (isFavorite) {
         await api.delete(`/favorites/${dishId}`);
@@ -102,13 +63,18 @@ export function Home({ isAdmin, user_id }) {
           prevFavorites.filter((favorite) => favorite !== dishId)
         );
       } else {
-        await api.post('/favorites', { dish_id: dishId });
+        await api.post(`/favorites/${dishId}`);
         setFavorites((prevFavorites) => [...prevFavorites, dishId]);
       }
     } catch (error) {
       console.log('Erro ao atualizar favoritos:', error);
     }
   };
+
+
+  function handleDetails(id) {
+    navigate(`/dish/${id}`);
+  }
 
   return (
     <ContainerHome>
@@ -130,25 +96,29 @@ export function Home({ isAdmin, user_id }) {
 
       <main>
         <div>
-          <header>
-            <img 
-              src={isDesktop ? bannerHomeDesktop : bannerHomeMobile} 
-              alt="Uma variedade de macarons coloridos em tons pastel, como rosa, azul, amarelo e verde, caem graciosamente ao lado de folhas verdes frescas e frutas suculentas, como morangos e framboesas, sobre um fundo branco limpo. A cena é vibrante e alegre, evocando uma sensação de frescor e doçura.." 
-            />
-          
-            <div>
-              <h1>Sabores inigualáveis</h1>
-              <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
+          <header>    
+            <div className="custom-header">
+              <img 
+                src={ isDesktop ? bannerHomeDesktop : bannerHomeMobile} 
+                alt="Uma variedade de macarons coloridos em tons pastel, como rosa, azul, amarelo e verde, 
+                caem graciosamente ao lado de folhas verdes frescas e frutas suculentas, como morangos e 
+                framboesas, sobre um fundo branco limpo. A cena é vibrante e alegre, evocando uma sensação 
+                de frescor e doçura.." 
+                className="header-image"
+              />
+            
+              <div className="header-content">
+                <h1>Sabores inigualáveis</h1>
+                <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
+              </div>
             </div>
           </header>
 
           <HomeContent>
             <Section title="Refeições">
               <Swiper
-                key={isDesktop}
-                ref={swiperElRef1}
+                slidesPerView={isDesktop ? 'auto' : 1}
                 spaceBetween={isDesktop ? 27 : 16}
-                slidesPerView="auto"
                 navigation={isDesktop ? true : false}
                 loop={true}
                 grabCursor={true}
@@ -160,7 +130,7 @@ export function Home({ isAdmin, user_id }) {
                         isAdmin={isAdmin}
                         data={dish}
                         isFavorite={favorites.includes(dish.id)}
-                        updateFavorite={updateFavorite} 
+                        toggleFavorite={toggleFavorite} 
                         user_id={user_id}
                         handleDetails={handleDetails}
                       />
@@ -172,10 +142,8 @@ export function Home({ isAdmin, user_id }) {
 
             <Section title="Sobremesas">
               <Swiper
-                key={isDesktop}
-                ref={swiperElRef2}
+                slidesPerView={isDesktop ? 'auto' : 1}
                 spaceBetween={isDesktop ? 27 : 16}
-                slidesPerView="auto"
                 navigation={isDesktop ? true : false}
                 loop={true}
                 grabCursor={true}
@@ -187,7 +155,6 @@ export function Home({ isAdmin, user_id }) {
                         isAdmin={isAdmin}
                         data={dish}
                         isFavorite={favorites.includes(dish.id)}
-                        updateFavorite={updateFavorite} 
                         user_id={user_id}
                         handleDetails={handleDetails}
                       />
@@ -199,10 +166,8 @@ export function Home({ isAdmin, user_id }) {
 
             <Section title="Bebidas">
               <Swiper
-                key={isDesktop}
-                ref={swiperElRef3}
+                slidesPerView={isDesktop ? 'auto' : 1}
                 spaceBetween={isDesktop ? 27 : 16}
-                slidesPerView="auto"
                 navigation={isDesktop ? true : false}
                 loop={true}
                 grabCursor={true}
@@ -214,7 +179,6 @@ export function Home({ isAdmin, user_id }) {
                         isAdmin={isAdmin}
                         data={dish} 
                         isFavorite={favorites.includes(dish.id)}
-                        updateFavorite={updateFavorite}
                         user_id={user_id}
                         handleDetails={handleDetails}
                       />

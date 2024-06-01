@@ -20,5 +20,8 @@ export default {
 
     DARK_BLUE: "#065E7C" /* LOGO */,
     LIGHT_BLUE: "#82F3FF" /* PRICES */,
+
+    GRADIENT1: "#091E26" /*HEADER HOME BACKGROUND */,
+    GRADIENT2: "#00131C" /*HEADER HOME BACKGROUND */,
   },
 };
