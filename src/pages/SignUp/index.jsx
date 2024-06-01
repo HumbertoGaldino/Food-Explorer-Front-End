@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { api } from '../../services/api'
 import { Link, useNavigate } from "react-router-dom";
 
 import { ContainerRegister, RegisterForm, Logo } from "./style";
@@ -10,26 +11,28 @@ import { Button } from "../../components/Button";
 import logo from "../../assets/logo.svg";
 
 export function SignUp() {
-  // States for form fields and loading status
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSignUp = () => {
-    if (!name || !email || !password) {
-      return alert("Todos os campos devem ser preenchidos!");
-    }
+  const navigate = useNavigate();
 
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      return alert("E-mail inválido! Por favor digite um e-mail válido!");
-    }
-
-    if (password.length < 6) {
-      return alert("A senha deve conter no mínimo 6 caracteres!");
-    }
-
+  const handleSignUp = async () => {
     setLoading(true);
+    try {
+      await api.post("/users", { name, email, password });
+      alert("Usuário cadastrado com sucesso!");
+      navigate("/");
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Não foi possível cadastrar.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,7 +48,7 @@ export function SignUp() {
           <Input 
             placeholder="Nome" 
             type="text"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(event) => setName(event.target.value)}
           />
         </Section>
 
@@ -53,7 +56,7 @@ export function SignUp() {
           <Input 
             placeholder="E-mail" 
             type="text"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
           />
         </Section>
 
@@ -61,7 +64,7 @@ export function SignUp() {
           <Input 
             placeholder="Senha" 
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
           />
         </Section>
 

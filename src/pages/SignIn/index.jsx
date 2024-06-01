@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useAuth } from '../../hooks/auth';
 
 import { ContainerLogin, LoginForm, Logo } from "./styles";
-
 import { Section } from '../../components/Section';
 import { Input } from '../../components/Input';
 import { Button } from "../../components/Button";
@@ -13,6 +13,8 @@ export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { signIn } = useAuth();
 
   function handleSignIn() {
     setLoading(true);
