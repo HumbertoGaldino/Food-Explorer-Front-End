@@ -17,7 +17,7 @@ import bannerHomeMobile from "../../assets/banner-home-mobile.png";
 import bannerHomeDesktop from "../../assets/banner-home-desktop.png";
 
 export function Home({ isAdmin, user_id }) {
-  const isDesktop = useMediaQuery({ minWidth: 1024 });
+  const isDesktopView = useMediaQuery({ minWidth: 1024 });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -73,12 +73,12 @@ export function Home({ isAdmin, user_id }) {
 
 
   function handleDetails(id) {
-    navigate(`/dish/${id}`);
+    navigate(`/dishes/${id}`);
   }
 
   return (
     <ContainerHome>
-      {!isDesktop && 
+      {!isDesktopView && 
         <Menu 
           isAdmin={isAdmin} 
           isMenuOpen={isMenuOpen} 
@@ -99,7 +99,7 @@ export function Home({ isAdmin, user_id }) {
           <header>    
             <div className="custom-header">
               <img 
-                src={ isDesktop ? bannerHomeDesktop : bannerHomeMobile} 
+                src={ isDesktopView ? bannerHomeDesktop : bannerHomeMobile} 
                 alt="Uma variedade de macarons coloridos em tons pastel, como rosa, azul, amarelo e verde, 
                 caem graciosamente ao lado de folhas verdes frescas e frutas suculentas, como morangos e 
                 framboesas, sobre um fundo branco limpo. A cena é vibrante e alegre, evocando uma sensação 
@@ -117,9 +117,9 @@ export function Home({ isAdmin, user_id }) {
           <HomeContent>
             <Section title="Refeições">
               <Swiper
-                slidesPerView={isDesktop ? 'auto' : 1}
-                spaceBetween={isDesktop ? 27 : 16}
-                navigation={isDesktop ? true : false}
+                slidesPerView={isDesktopView ? 'auto' : 1}
+                spaceBetween={isDesktopView ? 27 : 16}
+                navigation={isDesktopView ? true : false}
                 loop={true}
                 grabCursor={true}
               >
@@ -142,9 +142,9 @@ export function Home({ isAdmin, user_id }) {
 
             <Section title="Sobremesas">
               <Swiper
-                slidesPerView={isDesktop ? 'auto' : 1}
-                spaceBetween={isDesktop ? 27 : 16}
-                navigation={isDesktop ? true : false}
+                slidesPerView={isDesktopView ? 'auto' : 1}
+                spaceBetween={isDesktopView ? 27 : 16}
+                navigation={isDesktopView ? true : false}
                 loop={true}
                 grabCursor={true}
               >
@@ -166,9 +166,9 @@ export function Home({ isAdmin, user_id }) {
 
             <Section title="Bebidas">
               <Swiper
-                slidesPerView={isDesktop ? 'auto' : 1}
-                spaceBetween={isDesktop ? 27 : 16}
-                navigation={isDesktop ? true : false}
+                slidesPerView={isDesktopView ? 'auto' : 1}
+                spaceBetween={isDesktopView ? 27 : 16}
+                navigation={isDesktopView ? true : false}
                 loop={true}
                 grabCursor={true}
               >

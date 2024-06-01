@@ -5,6 +5,8 @@ export const ContainerButtonText = styled.button`
   font-weight: 500;
   font-size: 2.4rem;
   line-height: 140%;
+  background: transparent;
+  border: none;
 
   color: ${({ theme }) => theme.COLORS.GRAY_200};
 

@@ -14,7 +14,7 @@ import { ContainerCard, CardTitle, OrderButton } from "./style";
 import { NumberPicker } from '../../components/NumberPicker';
 import { Button } from "../../components/Button";
 
-export function Food({ data, isAdmin, isFavorite, updateFavorite, handleDetails, user_id, ...rest }) {
+export function Food({ data, isAdmin, isFavorite, toggleFavorite, handleDetails, user_id, ...rest }) {
   const isDesktop = useMediaQuery({ minWidth: 1024 });
 
   const params = useParams();
