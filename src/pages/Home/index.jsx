@@ -11,7 +11,10 @@ import { Food } from "../../components/Food";
 import { Footer } from '../../components/Footer';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 import bannerHomeMobile from "../../assets/banner-home-mobile.png";
 import bannerHomeDesktop from "../../assets/banner-home-desktop.png";
@@ -117,15 +120,17 @@ export function Home({ isAdmin, user_id }) {
           <HomeContent>
             <Section title="Refeições">
               <Swiper
+                modules={[Navigation,Pagination]}
+                pagination
+                className="swiper-container"
                 slidesPerView={isDesktopView ? 'auto' : 1}
                 spaceBetween={isDesktopView ? 27 : 16}
                 navigation={isDesktopView ? true : false}
                 loop={true}
                 grabCursor={true}
               >
-                {
-                  dishes.meals.map(dish => (
-                    <SwiperSlide key={String(dish.id)}>
+                {dishes.meals.map(dish => (
+                    <SwiperSlide className="swiper-item" key={String(dish.id)}>
                       <Food 
                         isAdmin={isAdmin}
                         data={dish}
@@ -135,13 +140,15 @@ export function Home({ isAdmin, user_id }) {
                         handleDetails={handleDetails}
                       />
                     </SwiperSlide>
-                  ))
-                }
+                  ))}
               </Swiper>
             </Section>
 
             <Section title="Sobremesas">
               <Swiper
+                modules={[Navigation,Pagination]}
+                pagination
+                className="swiper-container"
                 slidesPerView={isDesktopView ? 'auto' : 1}
                 spaceBetween={isDesktopView ? 27 : 16}
                 navigation={isDesktopView ? true : false}
@@ -150,7 +157,7 @@ export function Home({ isAdmin, user_id }) {
               >
                 {
                   dishes.desserts.map(dish => (
-                    <SwiperSlide key={String(dish.id)}>
+                    <SwiperSlide className="swiper-item" key={String(dish.id)}>
                       <Food 
                         isAdmin={isAdmin}
                         data={dish}
@@ -166,6 +173,9 @@ export function Home({ isAdmin, user_id }) {
 
             <Section title="Bebidas">
               <Swiper
+                modules={[Navigation,Pagination]}
+                pagination
+                className="swiper-container"
                 slidesPerView={isDesktopView ? 'auto' : 1}
                 spaceBetween={isDesktopView ? 27 : 16}
                 navigation={isDesktopView ? true : false}
@@ -174,7 +184,7 @@ export function Home({ isAdmin, user_id }) {
               >
                 {
                   dishes.beverages.map(dish => (
-                    <SwiperSlide key={String(dish.id)}>
+                    <SwiperSlide className="swiper-item" key={String(dish.id)}>
                       <Food 
                         isAdmin={isAdmin}
                         data={dish} 

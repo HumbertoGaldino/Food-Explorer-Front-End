@@ -166,12 +166,20 @@ export const HomeContent = styled.div`
 
     .swiper-container::before {
       left: 0;
-      background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
+      background: linear-gradient(
+        90deg,
+        rgba(0, 10, 15, 1) 27%,
+        transparent 100%
+      );
     }
 
     .swiper-container::after {
       right: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 100%);
+      background: linear-gradient(
+        90deg,
+        transparent 27%,
+        rgba(0, 10, 15, 1) 100%
+      );
     }
 
     .swiper-slide {
