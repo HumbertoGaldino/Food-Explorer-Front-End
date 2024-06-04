@@ -162,6 +162,7 @@ export function Home({ isAdmin, user_id }) {
                         isAdmin={isAdmin}
                         data={dish}
                         isFavorite={favorites.includes(dish.id)}
+                        toggleFavorite={toggleFavorite}
                         user_id={user_id}
                         handleDetails={handleDetails}
                       />
@@ -189,6 +190,7 @@ export function Home({ isAdmin, user_id }) {
                         isAdmin={isAdmin}
                         data={dish} 
                         isFavorite={favorites.includes(dish.id)}
+                        toggleFavorite={toggleFavorite}
                         user_id={user_id}
                         handleDetails={handleDetails}
                       />

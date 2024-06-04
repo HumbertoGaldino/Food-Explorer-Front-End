@@ -168,7 +168,7 @@ export const HomeContent = styled.div`
       left: 0;
       background: linear-gradient(
         90deg,
-        rgba(0, 10, 15, 1) 27%,
+        rgba(0, 10, 15, 1) 10%,
         transparent 100%
       );
     }

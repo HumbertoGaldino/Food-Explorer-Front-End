@@ -33,6 +33,10 @@ export function NavigationHeader({ isAdmin, isDisabled, isMenuOpen, setIsMenuOpe
     signOut();
   }
 
+  function handleHome() {
+    navigate(`/`);
+  }
+
   return (
     <NavigationHeaderContainer>
       {!isDesktop && (
@@ -50,7 +54,7 @@ export function NavigationHeader({ isAdmin, isDisabled, isMenuOpen, setIsMenuOpe
       {(isDesktop || !isMenuOpen) && (
         <>
           <Logo>
-            <img src={logoUser} alt="Logo" />
+              <img src={logoUser} alt="Logo" onClick={handleHome}/>
           </Logo>
 
           {isDesktop && <SearchBar isDisabled={isDisabled} setSearch={setSearch} />}

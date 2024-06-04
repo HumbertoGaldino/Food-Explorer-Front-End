@@ -2,6 +2,8 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { api } from '../services/api'
 
 const AuthContext = createContext({});
+import { jwtDecode } from 'jwt-decode';
+
 
 export const AuthProvider = ({ children }) => {
   const [data, setData] = useState({});
@@ -31,6 +33,24 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("@foodexplorer:user");
 
     setData({});
+  }
+
+  function isAuthenticated() {
+    const user = localStorage.getItem("@foodexplorer:user");
+
+    if (!user) {
+      return false;
+    }
+
+    const token = localStorage.getItem("@foodexplorer:token");
+    const tokenExpiration = jwtDecode(token).exp;
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    if (tokenExpiration < currentTime) {
+      return false;
+    }
+
+    return true;
   }
 
   async function updateProfile({ user, avatarFile }) {
@@ -73,7 +93,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut, updateProfile }}>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut, isAuthenticated, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );
