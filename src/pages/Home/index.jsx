@@ -123,7 +123,7 @@ export function Home({ isAdmin, user_id }) {
                 modules={[Navigation,Pagination]}
                 pagination
                 className="swiper-container"
-                slidesPerView={isDesktopView ? 'auto' : 1}
+                slidesPerView={isDesktopView ? 3 : 1}
                 spaceBetween={isDesktopView ? 27 : 16}
                 navigation={isDesktopView ? true : false}
                 loop={true}
@@ -149,7 +149,7 @@ export function Home({ isAdmin, user_id }) {
                 modules={[Navigation,Pagination]}
                 pagination
                 className="swiper-container"
-                slidesPerView={isDesktopView ? 'auto' : 1}
+                slidesPerView={isDesktopView ? 3 : 1}
                 spaceBetween={isDesktopView ? 27 : 16}
                 navigation={isDesktopView ? true : false}
                 loop={true}
@@ -177,7 +177,7 @@ export function Home({ isAdmin, user_id }) {
                 modules={[Navigation,Pagination]}
                 pagination
                 className="swiper-container"
-                slidesPerView={isDesktopView ? 'auto' : 1}
+                slidesPerView={isDesktopView ? 3 : 1}
                 spaceBetween={isDesktopView ? 27 : 16}
                 navigation={isDesktopView ? true : false}
                 loop={true}
