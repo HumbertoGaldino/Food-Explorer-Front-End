@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useMediaQuery } from "react-responsive";
 import { ContainerCart, Main } from './style';
 
+import { Menu } from "../../components/Menu";
 import { NavigationHeader } from '../../components/NavigationHeader';
 import { Footer } from '../../components/Footer';
 import { CartItem } from '../../components/CartItem';
@@ -13,11 +15,16 @@ import { FaRegCreditCard } from 'react-icons/fa6';
 
 import qrCode from '../../assets/qr-code.svg';
 
-export function Cart(user){
+export function Cart({isAdmin}){
+    const isDesktopView = useMediaQuery({ minWidth: 1024 });
     const [cartItems, setCartItems] = useState([]);
     const [carts, setCarts] = useState([]);
     const [paymentType, setPaymentType] = useState('card');
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [search, setSearch] = useState("");
 
+    const user = JSON.parse(localStorage.getItem("@foodexplorer:user"));
+    
     const handlePix = () => setPaymentType('pix');
 
     const handleCreditCard = () => setPaymentType('card');
@@ -27,9 +34,8 @@ export function Cart(user){
         
       };
 
-    const user_id = user.user.id;
-
     useEffect(() => {
+        
         const fetchDishData = async () => {
             try {
                 const getCarts = await api.get('/carts');
@@ -44,7 +50,7 @@ export function Cart(user){
     
     useEffect(() => {
         const findUserCart = () => {
-            const cartUser = carts.find(cart => cart.user_id === user_id);
+            const cartUser = carts.find(cart => cart.user_id === user.id);
             if (cartUser) {
                 const cartId = cartUser.id;
     
@@ -55,7 +61,6 @@ export function Cart(user){
     
                         const fetchedItems = await Promise.all(items.map(async item => {
                             try {
-                                console.log(item)
                                 const dishResponse = await api.get(`/dishes/${item.dish_id}`);
                                 const objectItem = {
                                     cart_id: item.cart_id,
@@ -73,7 +78,6 @@ export function Cart(user){
                         }));
     
                         setCartItems(fetchedItems);
-                        console.log(cartItems)
                     } catch (error) {
                         console.error("Ocorreu um erro ao buscar os itens do carrinho:", error);
                     }
@@ -88,13 +92,27 @@ export function Cart(user){
         if (carts.length > 0) {
             findUserCart();
         }
-    }, [carts, user_id]);
+    }, [carts, user.id]);
 
     const totalPrice = cartItems.reduce((total, item) => total + (item.quantity * item.price), 0).toFixed(2);
 
     return (
         <ContainerCart>
-            <NavigationHeader />
+            {!isDesktopView && 
+                <Menu 
+                isAdmin={isAdmin} 
+                isMenuOpen={isMenuOpen} 
+                setIsMenuOpen={setIsMenuOpen} 
+                setSearch={setSearch}
+                />
+            }
+
+            <NavigationHeader
+                isAdmin={isAdmin} 
+                isMenuOpen={isMenuOpen} 
+                setIsMenuOpen={setIsMenuOpen} 
+                setSearch={setSearch}
+            />
 
             <Main>
                 <section className='allOrders'>

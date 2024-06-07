@@ -11,15 +11,13 @@ export const ContainerCart = styled.div`
     "main"
     "footer";
 
-  overflow-x: hidden;
-
   @media (max-width: 768px) {
     grid-template-rows: auto 1fr auto;
   }
 `;
 
 export const Main = styled.main`
-  height: 100vh;
+  height: auto;
   grid-area: main;
   padding: 2.4rem 12.3rem;
 
