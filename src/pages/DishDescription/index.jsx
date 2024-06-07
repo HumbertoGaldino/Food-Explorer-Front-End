@@ -32,7 +32,7 @@ export function DishDescription({ isAdmin, userId }) {
   }
 
   const handleEditDish = () => {
-    navigate(`/edit/${params.id}`);
+    navigate(`/edit-dish/${params.id}`);
   }
 
   useEffect(() => {
@@ -129,7 +129,7 @@ export function DishDescription({ isAdmin, userId }) {
                 <div className="actions">
                   {isAdmin ? 
                     <Button 
-                      title="Edit Dish" 
+                      title="Editar Prato" 
                       className="edit" 
                       onClick={handleEditDish}
                       loading={loading}
