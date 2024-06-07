@@ -13,7 +13,7 @@ import { NumberPicker } from "../../components/NumberPicker";
 import { Button } from "../../components/Button";
 import { Footer } from '../../components/Footer';
 
-export function DishDescription({ isAdmin, userId }) {
+export function DishDescription({ isAdmin }) {
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
 
   const [menuVisible, setMenuVisible] = useState(false);
@@ -26,6 +26,10 @@ export function DishDescription({ isAdmin, userId }) {
   const [cartId, setCartId] = useState(null);
 
   const [loading, setLoading] = useState(false);
+
+  const reloadPage = () => {
+    window.location.reload();
+  };
 
   const handleGoBack = () => {
     navigate(-1);
@@ -48,35 +52,38 @@ export function DishDescription({ isAdmin, userId }) {
     fetchDishData();
   }, [params.id]);
 
-  const handleAddToCart = async () => {
+  async function handleInclude() {
     setLoading(true);
+
+    const user = JSON.parse(localStorage.getItem("@foodexplorer:user"));
 
     try {
       const cartItem = {
         dish_id: dishData.id,
         name: dishData.name,
-        quantity,
+        quantity: number,
       };
 
-      const response = await api.get('/carts', { params: { created_by: userId } });
-      const userCart = response.data[0];
+      const response = await api.get('/carts', { params: { created_by: user.id } });
+      const cart = response.data[0];
 
-      if (userCart) {
-        await api.patch(`/carts/${userCart.id}`, { cart_items: [cartItem] });
+      if (cart) {
+        await api.patch(`/carts/${cart.id}`, { cart_items: [cartItem] });
       } else {
-        const createResponse = await api.post('/carts', { cart_items: [cartItem], created_by: userId });
-        const newCart = createResponse.data;
+        const createResponse = await api.post('/carts', { cart_items: [cartItem], created_by: user.id });
+        const createdCart = createResponse.data;
 
-        setCartId(newCart.id);
+        setCartId(createdCart.id);
       }
 
       alert('Prato adicionado ao carrinho!');
+      reloadPage()
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
       } else {
-        alert('Falha ao adicionar o prato ao carrinho.');
-        console.error('Erro ao adicionar ao carrinho:', error);
+        alert('Não foi possível adicionar ao carrinho.');
+        console.log('Erro ao adicionar ao carrinho:', error);
       }
     } finally {
       setLoading(false);
@@ -143,7 +150,7 @@ export function DishDescription({ isAdmin, userId }) {
                           `Pedido • R$ ${(dishData.price * number).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
                         } 
                         className="add"
-                        onClick={handleAddToCart}
+                        onClick={handleInclude}
                         loading={loading}
                       />
                     </>
