@@ -4,6 +4,7 @@ import { useMediaQuery } from "react-responsive";
 
 import { useAuth } from '../../hooks/auth';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { NavigationHeaderContainer, MenuButton, Logo, LogoutButton } from "./style";
 
 import { SearchBar } from "../../components/SearchBar";
@@ -16,6 +17,8 @@ import logoMobileAdmin from "../../assets/brand-mobile-admin.svg";
 export function NavigationHeader({ isAdmin, isDisabled, isMenuOpen, setIsMenuOpen, setSearch }) {
   const isDesktop = useMediaQuery({ minWidth: 1024 });
   const logoUser = isAdmin ? (isDesktop ? logoDesktopAdmin : logoMobileAdmin) : logo;
+
+  let cart = false;
   
   const { signOut } = useAuth();
   const navigate = useNavigate();
@@ -37,6 +40,11 @@ export function NavigationHeader({ isAdmin, isDisabled, isMenuOpen, setIsMenuOpe
     navigate(`/`);
   }
 
+  function handleOrders() {
+    navigate(`/cart`);
+  }
+
+ 
   return (
     <NavigationHeaderContainer>
       {!isDesktop && (
@@ -65,7 +73,7 @@ export function NavigationHeader({ isAdmin, isDisabled, isMenuOpen, setIsMenuOpe
 
           {isAdmin ? 
             (isDesktop && <Button className="new" title="Novo prato" onClick={handleNew} />) :
-            <Button className="orders" title={isDesktop ? "Pedidos" : undefined} isCustomer orderCount={0} />
+            <Button className="orders" title={isDesktop ? "Pedidos" : undefined} isCustomer orderCount={0} onClick={handleOrders} />
           }
 
           {isDesktop &&

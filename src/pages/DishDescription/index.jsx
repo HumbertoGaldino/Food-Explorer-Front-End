@@ -22,7 +22,7 @@ export function DishDescription({ isAdmin, userId }) {
   const params = useParams();
   const navigate = useNavigate();
 
-  const [quantity, setQuantity] = useState(1);
+  const [number, setNumber] = useState(1);
   const [cartId, setCartId] = useState(null);
 
   const [loading, setLoading] = useState(false);
@@ -135,12 +135,12 @@ export function DishDescription({ isAdmin, userId }) {
                       loading={loading}
                     /> : 
                     <>
-                      <NumberPicker quantity={quantity} setQuantity={setQuantity} />
+                      <NumberPicker number={number} setNumber={setNumber} />
                       <Button 
                         title={
                           isLargeScreen ? 
-                          `Adicionar ao carrinho • R$ ${(dishData.price * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : 
-                          `Pedido • R$ ${(dishData.price * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+                          `Adicionar ao carrinho • R$ ${(dishData.price * number).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : 
+                          `Pedido • R$ ${(dishData.price * number).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
                         } 
                         className="add"
                         onClick={handleAddToCart}
