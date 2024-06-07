@@ -5,6 +5,8 @@ import { useMediaQuery } from "react-responsive";
 import { useAuth } from '../../hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { api } from '../../services/api';
+
 import { NavigationHeaderContainer, MenuButton, Logo, LogoutButton } from "./style";
 
 import { SearchBar } from "../../components/SearchBar";
@@ -18,10 +20,13 @@ export function NavigationHeader({ isAdmin, isDisabled, isMenuOpen, setIsMenuOpe
   const isDesktop = useMediaQuery({ minWidth: 1024 });
   const logoUser = isAdmin ? (isDesktop ? logoDesktopAdmin : logoMobileAdmin) : logo;
 
-  let cart = false;
+  const [carts, setCarts] = useState([])
+  const [cartItems, setCartItems] = useState([]);
+  const user = JSON.parse(localStorage.getItem("@foodexplorer:user"));
   
   const { signOut } = useAuth();
   const navigate = useNavigate();
+
 
   function handleFavorites() {
     navigate("/favorites");
@@ -43,6 +48,48 @@ export function NavigationHeader({ isAdmin, isDisabled, isMenuOpen, setIsMenuOpe
   function handleOrders() {
     navigate(`/cart`);
   }
+
+  useEffect(() => {
+        
+    const fetchDishData = async () => {
+        try {
+            const getCarts = await api.get('/carts');
+            setCarts(getCarts.data);
+        } catch (error) {
+            console.error("Ocorreu um erro ao buscar os dados do carrinho:", error);
+        }
+    }
+
+    fetchDishData();
+  }, []);
+
+  useEffect(() => {
+    const findUserCart = () => {
+        const cartUser = carts.find(cart => cart.user_id === user.id);
+        if (cartUser) {
+            const cartId = cartUser.id;
+
+            const fetchCartItems = async () => {
+              try {
+                  const response = await api.get(`/carts/${cartId}`);
+                  const items = response.data.items;
+
+              setCartItems(items);
+            } catch (error) {
+                console.error("Ocorreu um erro ao buscar os itens do carrinho:", error);
+            }
+          };
+
+          fetchCartItems();
+        } else {
+            console.log("Carrinho do usuário não encontrado.");
+        }
+    };
+
+    if (carts.length > 0) {
+        findUserCart();
+    }
+  }, [carts, user.id]);
 
  
   return (
@@ -74,7 +121,7 @@ export function NavigationHeader({ isAdmin, isDisabled, isMenuOpen, setIsMenuOpe
 
           {isAdmin ? 
             (isDesktop && <Button className="new" title="Novo prato" onClick={handleNew} />) :
-            <Button className="orders" title={isDesktop ? "Pedidos" : undefined} isCustomer orderCount={0} onClick={handleOrders} />
+            <Button className="orders" title={isDesktop ? "Pedidos" : undefined} isCustomer orderCount={cartItems.length} onClick={handleOrders} />
           }
 
           {isDesktop &&

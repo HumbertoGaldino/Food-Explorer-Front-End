@@ -41,6 +41,10 @@ export function Food({ data, isAdmin, isFavorite, toggleFavorite, handleDetails,
     navigate(`/edit-dish/${data.id}`);
   }
 
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
   async function handleInclude() {
     setLoading(true);
 
@@ -64,6 +68,7 @@ export function Food({ data, isAdmin, isFavorite, toggleFavorite, handleDetails,
       }
 
       alert('Prato adicionado ao carrinho!');
+      reloadPage()
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);

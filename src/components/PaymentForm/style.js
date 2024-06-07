@@ -12,5 +12,6 @@ export const ContainerPaymentForm = styled.form`
   .secondRow {
     display: flex;
     gap: 2rem;
+    margin-bottom: 3rem;
   }
 `;

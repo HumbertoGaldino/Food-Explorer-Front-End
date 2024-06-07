@@ -12,11 +12,15 @@ export function Menu({ isAdmin, isMenuOpen, setIsMenuOpen, setSearch, isDisabled
   const navigate = useNavigate();
 
   function handleNew() {
-    navigate("/create");
+    navigate("/new");
   }
 
   function handleFavorites() {
     navigate("/favorites");
+  }
+
+  function handleHome() {
+    navigate("/");
   }
 
   function handleSignOut() {
@@ -30,6 +34,10 @@ export function Menu({ isAdmin, isMenuOpen, setIsMenuOpen, setSearch, isDisabled
 
       <main>
         <SearchBar isDisabled={isDisabled} setSearch={setSearch} />
+
+        <ButtonText onClick={handleHome}>
+          Home
+        </ButtonText>
 
         {isAdmin && (
           <ButtonText onClick={handleNew}>
