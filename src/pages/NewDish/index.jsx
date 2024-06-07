@@ -172,9 +172,9 @@ export function NewDish({ isAdmin }) {
                     onChange={(event) => setCategory(event.target.value)}
                   >
                     <option value="">Selecionar</option>
-                    <option value="meal">Refeição</option>
-                    <option value="dessert">Sobremesa</option>
-                    <option value="beverage">Bebida</option>
+                    <option value="Refeição">Refeição</option>
+                    <option value="Sobremesa">Sobremesa</option>
+                    <option value="Bebida">Bebida</option>
                   </select>
                   <RiArrowDownSLine size="2.4rem" />
                 </label>
