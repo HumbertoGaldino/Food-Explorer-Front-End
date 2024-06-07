@@ -19,7 +19,7 @@ export const ContainerNewDish = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 1.6rem;
-    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_DARK_600};
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_DARK_500};
     padding: 0.8rem;
     border-radius: 0.8rem;
 
@@ -144,7 +144,7 @@ export const ImageNewDish = styled.div`
   padding: 1.2rem 3.2rem;
   border-radius: 0.8rem;
   position: relative;
-  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_DARK_600};
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_DARK_500};
   color: ${({ theme }) => theme.COLORS.WHITE};
 
   &:focus-within {
@@ -214,7 +214,7 @@ export const CategoryNewDish = styled.div`
       padding: 1.2rem 1.6rem;
       border-radius: 0.8rem;
 
-      background-color: ${({ theme }) => theme.COLORS.BACKGROUND_DARK_600};
+      background-color: ${({ theme }) => theme.COLORS.BACKGROUND_DARK_500};
       color: ${({ theme }) => theme.COLORS.GRAY_100};
 
       font-weight: 400;

@@ -14,7 +14,7 @@ export const ContainerInput = styled.div`
 
     padding: 1.2rem 1.4rem;
     color: ${({ theme }) => theme.COLORS.WHITE};
-    background: transparent;
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_DARK_500};
     border: 0;
 
     &::placeholder {
