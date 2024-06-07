@@ -38,7 +38,7 @@ export function Food({ data, isAdmin, isFavorite, toggleFavorite, handleDetails,
   };
 
   function handleEdit() {
-    navigate(`/edit/${data.id}`);
+    navigate(`/edit-dish/${data.id}`);
   }
 
   async function handleInclude() {

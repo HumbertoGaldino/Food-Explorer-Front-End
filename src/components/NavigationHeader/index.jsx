@@ -67,7 +67,8 @@ export function NavigationHeader({ isAdmin, isDisabled, isMenuOpen, setIsMenuOpe
 
           {isDesktop && <SearchBar isDisabled={isDisabled} setSearch={setSearch} />}
 
-          {isDesktop &&
+          {isAdmin ? '' :
+            isDesktop &&
             <button className="favorites" onClick={handleFavorites}>Meus favoritos</button>
           }
 
