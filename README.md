@@ -95,7 +95,7 @@ Este projeto foi desenvolvido utilizando:
 <br>
 
 <h2 id="como-usar">💡 Como Usar</h2>
-O Food Explorer está disponível online <a href="" target="_blank">aqui</a>.
+O Food Explorer está disponível online <a href="https://food-explorer-humberto.netlify.app/" target="_blank">aqui</a>.
 
 
 Para executá-lo localmente, siga os passos abaixo, assegurando-se de ter o Node.js e o npm instalados:
