@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const NavigationHeaderContainer = styled.header`
   grid-area: header;
   height: 11.4rem;
-  width: 100%;
+  width: 100vw;
   padding: 5.6rem 2.8rem 2.4rem;
   display: flex;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_DARK_300};

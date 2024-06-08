@@ -26,6 +26,16 @@ export function Home({ isAdmin, user_id }) {
 
   const [dishes, setDishes] = useState({ meals: [], desserts: [], beverages: [] });
   const [search, setSearch] = useState("");
+
+  const swiperRef = useRef(null);
+
+  useEffect(() => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideTo(0);
+      swiperRef.current.swiper.update();
+    }
+  }, [dishes.meals, dishes.desserts, dishes.beverages]);
+
  
   useEffect(() => {
     async function fetchDishes() {
@@ -74,11 +84,11 @@ export function Home({ isAdmin, user_id }) {
     }
   };
 
-
   function handleDetails(id) {
     navigate(`/dishes/${id}`);
   }
 
+  
   return (
     <ContainerHome>
       {!isDesktopView && 
@@ -120,12 +130,12 @@ export function Home({ isAdmin, user_id }) {
           <HomeContent>
             <Section title="Refeições">
               <Swiper
-                modules={[Navigation,Pagination]}
-                pagination
+                modules={[Navigation, Pagination]}
+                pagination={{ clickable: true }}
                 className="swiper-container"
                 slidesPerView={isDesktopView ? 3 : 1}
                 spaceBetween={isDesktopView ? 27 : 16}
-                navigation={isDesktopView ? true : false}
+                navigation={true}
                 loop={true}
                 grabCursor={true}
               >
@@ -146,12 +156,12 @@ export function Home({ isAdmin, user_id }) {
 
             <Section title="Sobremesas">
               <Swiper
-                modules={[Navigation,Pagination]}
-                pagination
+                modules={[Navigation, Pagination]}
+                pagination={{ clickable: true }}
                 className="swiper-container"
                 slidesPerView={isDesktopView ? 3 : 1}
                 spaceBetween={isDesktopView ? 27 : 16}
-                navigation={isDesktopView ? true : false}
+                navigation={true}
                 loop={true}
                 grabCursor={true}
               >
@@ -174,14 +184,16 @@ export function Home({ isAdmin, user_id }) {
 
             <Section title="Bebidas">
               <Swiper
-                modules={[Navigation,Pagination]}
-                pagination
+                modules={[Navigation, Pagination]}
+                pagination={{ clickable: true }}
                 className="swiper-container"
                 slidesPerView={isDesktopView ? 3 : 1}
                 spaceBetween={isDesktopView ? 27 : 16}
-                navigation={isDesktopView ? true : false}
+                navigation={true}
                 loop={true}
                 grabCursor={true}
+                loopFillGroupWithBlank={true}
+                onSwiper={(swiper) => swiper.slideTo(0)}
               >
                 {
                   dishes.beverages.map(dish => (

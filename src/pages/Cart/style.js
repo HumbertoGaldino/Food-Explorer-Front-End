@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const ContainerCart = styled.div`
   width: 100vw;
-  height: 100vh;
 
   display: grid;
   grid-template-rows: 10.4rem auto 7.2rem;
@@ -17,9 +16,10 @@ export const ContainerCart = styled.div`
 `;
 
 export const Main = styled.main`
+  width: 100vw;
   height: auto;
   grid-area: main;
-  padding: 2.4rem 12.3rem;
+  padding: 2.4rem 10rem;
 
   display: grid;
   grid-template-columns: 2fr 2.5fr;
