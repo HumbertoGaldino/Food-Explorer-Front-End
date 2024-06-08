@@ -133,7 +133,7 @@ export function Home({ isAdmin, user_id }) {
                 modules={[Navigation, Pagination]}
                 pagination={{ clickable: true }}
                 className="swiper-container"
-                slidesPerView={isDesktopView ? 3 : 1}
+                slidesPerView={isDesktopView ? 3 : 2}
                 spaceBetween={isDesktopView ? 27 : 16}
                 navigation={true}
                 loop={true}
@@ -159,7 +159,7 @@ export function Home({ isAdmin, user_id }) {
                 modules={[Navigation, Pagination]}
                 pagination={{ clickable: true }}
                 className="swiper-container"
-                slidesPerView={isDesktopView ? 3 : 1}
+                slidesPerView={isDesktopView ? 3 : 2}
                 spaceBetween={isDesktopView ? 27 : 16}
                 navigation={true}
                 loop={true}
@@ -187,7 +187,7 @@ export function Home({ isAdmin, user_id }) {
                 modules={[Navigation, Pagination]}
                 pagination={{ clickable: true }}
                 className="swiper-container"
-                slidesPerView={isDesktopView ? 3 : 1}
+                slidesPerView={isDesktopView ? 3 : 2}
                 spaceBetween={isDesktopView ? 27 : 16}
                 navigation={true}
                 loop={true}

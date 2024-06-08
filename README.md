@@ -70,6 +70,7 @@ A aplicação oferece as seguintes funcionalidades:
 <li>Remoção de pratos dos favoritos</li>
 <li>Exibição de pratos favoritos</li>
 <li>Adição de pratos ao carrinho</li>
+<li>Remoção de pratos do carrinho</li>
 <li>Edição de pratos</li>
 <li>Exclusão de pratos</li>
 <li>Logout</li>
@@ -108,7 +109,7 @@ $ git clone https://github.com/HumbertoGaldino/Food-Explorer-Front-End.git
 2 - Navegue até o diretório do projeto:
 
 ```
-$ cd foodexplorer
+$ cd API-food-explorer
 ```
 
 3 - Instale as dependências:
@@ -123,7 +124,7 @@ $ npm install
 $ npm run dev
 ```
 
-⚠️ Nota: O back-end está hospedado em uma plataforma gratuita, o que pode resultar em tempos de resposta mais lentos. Caso queira executá-lo localmente segue o link do projeto abaixo.
+⚠️ Importante: O back-end está hospedado em uma plataforma gratuita, o que pode resultar em tempos de resposta mais lentos. Caso queira executá-lo localmente segue o link do projeto abaixo.
 
 <h3>
     <a href="https://github.com/HumbertoGaldino/API-Food-Explorer" target="_blank">Back-end Food Explorer</a>

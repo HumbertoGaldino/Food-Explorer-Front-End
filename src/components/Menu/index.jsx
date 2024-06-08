@@ -8,6 +8,7 @@ import { ButtonText } from "../ButtonText";
 import { useAuth } from '../../hooks/auth';
 
 export function Menu({ isAdmin, isMenuOpen, setIsMenuOpen, setSearch, isDisabled }) {
+
   const { signOut } = useAuth();
   const navigate = useNavigate();
 
