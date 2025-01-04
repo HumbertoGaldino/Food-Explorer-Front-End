@@ -38,7 +38,7 @@ Cardápio digital Food Explorer. Projeto desenvolvido para conclusão da formaç
 O Food Explorer é um projeto desenvolvido como o desafio final do programa Explorer da Rocketseat. Esta aplicação funciona como um cardápio digital para um restaurante fictício.
 <br>
 <br>
-O front-end, que lida com a interface do usuário, está neste repositório. O back-end, responsável pela lógica de negócios e armazenamento de dados, está disponível aqui.
+O front-end, que lida com a interface do usuário, está neste repositório. O back-end, responsável pela lógica de negócios e armazenamento de dados, está disponível <a href='https://github.com/HumbertoGaldino/API-Food-Explorer'>aqui</a>.
 <br>
 <br>
 
